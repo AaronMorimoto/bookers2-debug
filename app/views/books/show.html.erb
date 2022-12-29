@@ -22,6 +22,8 @@
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
+        </tr>
+        <tr>
           <td>
             <% @book.book_comments.each do |book_comment| %>
               <%= link_to(book_comment.user) do %>
@@ -33,12 +35,14 @@
               </td>
             <% end %>
           </td>
-          <% if @book.user == current_user %>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-          <% end %>
+            <% if @book.user == current_user %>
+              <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <% end %>
+        </tr>
+        <tr>
           <td>
             <%= form_with model: [@book, @book_comment] do |f| %>
-              <%= f.text_area :comment, rows: '5' %>
+              <%= f.text_area :comment, :size=>"60x5" %></br>
               <%= f.submit "送信する" %>
             <% end %>
           </td>
